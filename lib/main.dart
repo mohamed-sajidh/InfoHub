@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_navigation/src/root/get_material_app.dart';
+import 'package:infohub/feature/info_submit/info_submit_page.dart';
 import 'package:infohub/feature/landing_page/landing_page.dart';
 
 void main() {
@@ -10,7 +13,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       title: 'InfoHub',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
@@ -18,6 +21,12 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       home: const LandingPage(),
+      getPages: [
+        GetPage(
+          name: '/info-submit',
+          page: () => const InfoSubmitPage(),
+        )
+      ],
     );
   }
 }

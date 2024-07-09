@@ -1,4 +1,6 @@
+import 'package:adaptive_navbar/adaptive_navbar.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class LandingPage extends StatefulWidget {
   const LandingPage({super.key});
@@ -10,10 +12,23 @@ class LandingPage extends StatefulWidget {
 class _LandingPageState extends State<LandingPage> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 100,
-      height: 50,
-      color: Colors.red,
+    var screeenSize = MediaQuery.of(context).size;
+    var sw = screeenSize.width;
+    return Scaffold(
+      appBar: AdaptiveNavBar(
+        screenWidth: sw,
+        title: const Text("Adaptive NavBar"),
+        navBarItems: [
+          NavBarItem(
+            text: 'Sub Menu 1',
+            onTap: () {
+              Get.toNamed("/info-submit");
+            },
+          ),
+          NavBarItem(text: 'Sub Menu 2'),
+          NavBarItem(text: 'Sub Menu 3'),
+        ],
+      ),
     );
   }
 }
