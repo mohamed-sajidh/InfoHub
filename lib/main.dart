@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
+import 'package:infohub/feature/info_block/info_block_page.dart';
 import 'package:infohub/feature/info_submit/info_submit_page.dart';
 import 'package:infohub/feature/landing_page/landing_page.dart';
 
@@ -25,6 +26,10 @@ class MyApp extends StatelessWidget {
         GetPage(
           name: '/info-submit',
           page: () => const InfoSubmitPage(),
+        ),
+        GetPage(
+          name: '/info-block',
+          page: () => const InfoBlockPage(),
         )
       ],
     );

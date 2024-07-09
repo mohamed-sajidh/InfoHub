@@ -21,12 +21,13 @@ class _LandingPageState extends State<LandingPage> {
         navBarItems: [
           NavBarItem(
             text: 'Sub Menu 1',
-            onTap: () {
-              Get.toNamed("/info-submit");
-            },
+            onTap: () => Get.toNamed("/info-submit"),
           ),
           NavBarItem(text: 'Sub Menu 2'),
-          NavBarItem(text: 'Sub Menu 3'),
+          NavBarItem(
+            text: 'Sub Menu 3',
+            onTap: () => Get.toNamed("/info-block"),
+          ),
         ],
       ),
     );
