@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:infohub/feature/info_block/info_block_page.dart';
 import 'package:infohub/feature/info_submit/info_submit_page.dart';
+import 'package:infohub/feature/info_table/info_table_page.dart';
 import 'package:infohub/feature/landing_page/landing_page.dart';
 
 void main() {
@@ -26,6 +27,10 @@ class MyApp extends StatelessWidget {
         GetPage(
           name: '/info-submit',
           page: () => const InfoSubmitPage(),
+        ),
+        GetPage(
+          name: '/info-table',
+          page: () => const InfoTablePage(),
         ),
         GetPage(
           name: '/info-block',

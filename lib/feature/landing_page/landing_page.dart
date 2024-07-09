@@ -15,18 +15,43 @@ class _LandingPageState extends State<LandingPage> {
     var screeenSize = MediaQuery.of(context).size;
     var sw = screeenSize.width;
     return Scaffold(
-      appBar: AdaptiveNavBar(
-        screenWidth: sw,
-        title: const Text("Adaptive NavBar"),
-        navBarItems: [
-          NavBarItem(
-            text: 'Sub Menu 1',
-            onTap: () => Get.toNamed("/info-submit"),
+      body: Stack(
+        children: [
+          const Positioned.fill(
+            child: Image(
+              image: AssetImage('assets/background_img.png'),
+              fit: BoxFit.cover,
+            ),
           ),
-          NavBarItem(text: 'Sub Menu 2'),
-          NavBarItem(
-            text: 'Sub Menu 3',
-            onTap: () => Get.toNamed("/info-block"),
+          Positioned(
+            top: 10,
+            left: 50,
+            right: 50,
+            child: AdaptiveNavBar(
+              screenWidth: sw,
+              title: const Text(
+                "INFOHUB",
+                style: TextStyle(
+                  fontSize: 30,
+                  color: Color.fromARGB(255, 36, 77, 113),
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+              navBarItems: [
+                NavBarItem(
+                  text: 'Connect',
+                  onTap: () => Get.toNamed("/info-submit"),
+                ),
+                NavBarItem(
+                  text: 'Records',
+                  onTap: () => Get.toNamed("/info-table"),
+                ),
+                NavBarItem(
+                  text: 'Block',
+                  onTap: () => Get.toNamed("/info-block"),
+                ),
+              ],
+            ),
           ),
         ],
       ),
