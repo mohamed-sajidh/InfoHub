@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:infohub/feature/info_submit/widgets/success_popup.dart';
 
 class UserDetailsMobileView extends StatefulWidget {
   UserDetailsMobileView({super.key});
@@ -130,7 +131,7 @@ class _UserDetailsMobileViewState extends State<UserDetailsMobileView> {
                     ),
                     InkWell(
                       onTap: () {
-                        print("haiiii");
+                        showSuccessPopup(context, height, width);
                       },
                       child: Container(
                         height: height * 0.07,
