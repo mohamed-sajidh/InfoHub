@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:infohub/feature/info_submit/widgets/user_details_mobile_view.dart';
+import 'package:infohub/feature/info_submit/widgets/user_details_web_view.dart';
 
 class InfoSubmitPage extends StatelessWidget {
   const InfoSubmitPage({super.key});
@@ -10,20 +11,7 @@ class InfoSubmitPage extends StatelessWidget {
       builder: (context, orientation) {
         return orientation == Orientation.portrait
             ? UserDetailsMobileView()
-            : Column(
-                children: [
-                  Container(
-                    height: 50,
-                    width: 100,
-                    color: Colors.red,
-                  ),
-                  Container(
-                    height: 50,
-                    width: 100,
-                    color: Colors.blue,
-                  )
-                ],
-              );
+            : UserDetailsWebView();
       },
     );
   }
