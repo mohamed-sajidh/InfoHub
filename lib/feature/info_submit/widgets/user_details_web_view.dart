@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:infohub/feature/info_submit/info_submit_controller.dart';
 import 'package:infohub/feature/info_submit/widgets/success_popup.dart';
 
 class UserDetailsWebView extends StatefulWidget {
@@ -10,6 +11,11 @@ class UserDetailsWebView extends StatefulWidget {
 }
 
 class _UserDetailsWebViewState extends State<UserDetailsWebView> {
+  final anFormKey = GlobalKey<FormState>();
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _numberController = TextEditingController();
+  final TextEditingController _dateController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     var screeenSize = MediaQuery.of(context).size;
@@ -70,7 +76,7 @@ class _UserDetailsWebViewState extends State<UserDetailsWebView> {
                           Padding(
                             padding: const EdgeInsets.only(top: 10, bottom: 10),
                             child: TextFormField(
-                              // controller: widget.emailController,
+                              controller: _nameController,
                               // validator: (value) {
                               //   if (value == null || value.isEmpty) {
                               //     return 'required';
@@ -97,7 +103,7 @@ class _UserDetailsWebViewState extends State<UserDetailsWebView> {
                           Padding(
                             padding: const EdgeInsets.only(top: 10, bottom: 10),
                             child: TextFormField(
-                              // controller: widget.emailController,
+                              controller: _numberController,
                               // validator: (value) {
                               //   if (value == null || value.isEmpty) {
                               //     return 'required';
@@ -124,7 +130,7 @@ class _UserDetailsWebViewState extends State<UserDetailsWebView> {
                           Padding(
                             padding: const EdgeInsets.only(top: 10, bottom: 10),
                             child: TextFormField(
-                              // controller: widget.emailController,
+                              controller: _dateController,
                               // validator: (value) {
                               //   if (value == null || value.isEmpty) {
                               //     return 'required';
@@ -149,8 +155,19 @@ class _UserDetailsWebViewState extends State<UserDetailsWebView> {
                             height: height * 0.030,
                           ),
                           InkWell(
-                            onTap: () {
-                              showSuccessPopup(context, height, width);
+                            onTap: () async {
+                              final response = await DatabaseService().addUser(
+                                date: _dateController.text,
+                                name: _nameController.text,
+                                number: _numberController.text,
+                              );
+
+                              if (response == 'success') {
+                                showSuccessPopup(context, height, width);
+                                _nameController.clear();
+                                _dateController.clear();
+                                _numberController.clear();
+                              }
                             },
                             child: Container(
                               height: height * 0.07,

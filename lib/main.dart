@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
@@ -6,7 +7,16 @@ import 'package:infohub/feature/info_submit/info_submit_page.dart';
 import 'package:infohub/feature/info_table/info_table_page.dart';
 import 'package:infohub/feature/landing_page/landing_page.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: const FirebaseOptions(
+      apiKey: "AIzaSyBA8JZOulcQhEvTC-68h6IglRhmTSV1_F4",
+      appId: "1:217403791441:web:987b56ad07cc0da28e4070",
+      messagingSenderId: "217403791441",
+      projectId: "infohub-f3672",
+    ),
+  );
   runApp(const MyApp());
 }
 
