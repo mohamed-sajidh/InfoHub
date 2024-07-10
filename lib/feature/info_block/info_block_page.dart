@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:infohub/feature/info_block/info_block_controller.dart';
 import 'package:infohub/feature/info_block/widgets/info_card.dart';
 
 class InfoBlockPage extends StatelessWidget {
@@ -30,30 +31,43 @@ class InfoBlockPage extends StatelessWidget {
           ),
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(20),
-        child: LayoutBuilder(
-          builder: (context, constraints) {
-            int columns = constraints.maxWidth <= 550
-                ? 1
-                : constraints.maxWidth > 550 && constraints.maxWidth <= 1000
-                    ? 2
-                    : 4;
+      body: GetBuilder(
+        init: InfoBlockController(),
+        builder: (controller) {
+          return Obx(
+            () => controller.loading.isTrue
+                ? const Center(child: CircularProgressIndicator())
+                : Padding(
+                    padding: const EdgeInsets.all(20),
+                    child: LayoutBuilder(
+                      builder: (context, constraints) {
+                        int columns = constraints.maxWidth <= 550
+                            ? 1
+                            : constraints.maxWidth > 550 &&
+                                    constraints.maxWidth <= 1000
+                                ? 2
+                                : 4;
 
-            return GridView.builder(
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: columns,
-                crossAxisSpacing: 10.0,
-                mainAxisSpacing: 10.0,
-                childAspectRatio: 2,
-              ),
-              itemCount: 20,
-              itemBuilder: (context, index) {
-                return const InfoCard();
-              },
-            );
-          },
-        ),
+                        return GridView.builder(
+                          gridDelegate:
+                              SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: columns,
+                            crossAxisSpacing: 10.0,
+                            mainAxisSpacing: 10.0,
+                            childAspectRatio: 2,
+                          ),
+                          itemCount: controller.profiles.length,
+                          itemBuilder: (context, index) {
+                            return InfoCard(
+                              index: index,
+                            );
+                          },
+                        );
+                      },
+                    ),
+                  ),
+          );
+        },
       ),
     );
   }

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:infohub/feature/info_submit/info_submit_controller.dart';
+import 'package:infohub/feature/info_submit/info_submit_database_services.dart';
 import 'package:infohub/feature/info_submit/widgets/success_popup.dart';
 
 class UserDetailsWebView extends StatefulWidget {
@@ -54,9 +54,9 @@ class _UserDetailsWebViewState extends State<UserDetailsWebView> {
                     ),
                   ),
                   child: Padding(
-                    padding: const EdgeInsets.all(40.0),
+                    padding: const EdgeInsets.all(20.0),
                     child: Form(
-                      key: widget.anFormKey,
+                      key: anFormKey,
                       child: Column(
                         children: [
                           SizedBox(
@@ -77,12 +77,12 @@ class _UserDetailsWebViewState extends State<UserDetailsWebView> {
                             padding: const EdgeInsets.only(top: 10, bottom: 10),
                             child: TextFormField(
                               controller: _nameController,
-                              // validator: (value) {
-                              //   if (value == null || value.isEmpty) {
-                              //     return 'required';
-                              //   }
-                              //   return null;
-                              // },
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return 'required';
+                                }
+                                return null;
+                              },
                               decoration: const InputDecoration(
                                 border: InputBorder.none,
                                 filled: true,
@@ -98,18 +98,18 @@ class _UserDetailsWebViewState extends State<UserDetailsWebView> {
                             ),
                           ),
                           SizedBox(
-                            height: height * 0.030,
+                            height: height * 0.025,
                           ),
                           Padding(
                             padding: const EdgeInsets.only(top: 10, bottom: 10),
                             child: TextFormField(
                               controller: _numberController,
-                              // validator: (value) {
-                              //   if (value == null || value.isEmpty) {
-                              //     return 'required';
-                              //   }
-                              //   return null;
-                              // },
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return 'required';
+                                }
+                                return null;
+                              },
                               decoration: const InputDecoration(
                                 border: InputBorder.none,
                                 filled: true,
@@ -125,18 +125,18 @@ class _UserDetailsWebViewState extends State<UserDetailsWebView> {
                             ),
                           ),
                           SizedBox(
-                            height: height * 0.030,
+                            height: height * 0.025,
                           ),
                           Padding(
                             padding: const EdgeInsets.only(top: 10, bottom: 10),
                             child: TextFormField(
                               controller: _dateController,
-                              // validator: (value) {
-                              //   if (value == null || value.isEmpty) {
-                              //     return 'required';
-                              //   }
-                              //   return null;
-                              // },
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return 'required';
+                                }
+                                return null;
+                              },
                               decoration: const InputDecoration(
                                 border: InputBorder.none,
                                 filled: true,
@@ -156,17 +156,20 @@ class _UserDetailsWebViewState extends State<UserDetailsWebView> {
                           ),
                           InkWell(
                             onTap: () async {
-                              final response = await DatabaseService().addUser(
-                                date: _dateController.text,
-                                name: _nameController.text,
-                                number: _numberController.text,
-                              );
+                              if (anFormKey.currentState!.validate()) {
+                                final response =
+                                    await DatabaseService().addUser(
+                                  date: _dateController.text,
+                                  name: _nameController.text,
+                                  number: _numberController.text,
+                                );
 
-                              if (response == 'success') {
-                                showSuccessPopup(context, height, width);
-                                _nameController.clear();
-                                _dateController.clear();
-                                _numberController.clear();
+                                if (response == 'success') {
+                                  showSuccessPopup(context, height, width);
+                                  _nameController.clear();
+                                  _dateController.clear();
+                                  _numberController.clear();
+                                }
                               }
                             },
                             child: Container(
